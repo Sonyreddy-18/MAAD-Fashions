@@ -1,3 +1,4 @@
+@import "tailwindcss";
 :root {
   font-family: "Inter", "Segoe UI", Arial, sans-serif;
   font-synthesis: none;
@@ -8,8 +9,13 @@
 
 html,
 body,
-#root {
+#app {
   margin: 0;
   min-width: 320px;
   min-height: 100%;
+}
+
+/* Space for fixed MAAD navbar on all pages */
+.page-content {
+  padding-top: 105px;
 }
