@@ -187,7 +187,7 @@ export type ProductVideoGroupByOutputType = {
   id: number
   url: string
   title: string | null
-  productId: number
+  productId: number | null
   createdAt: Date
   _count: ProductVideoCountAggregateOutputType | null
   _avg: ProductVideoAvgAggregateOutputType | null
@@ -218,16 +218,16 @@ export type ProductVideoWhereInput = {
   id?: Prisma.IntFilter<"ProductVideo"> | number
   url?: Prisma.StringFilter<"ProductVideo"> | string
   title?: Prisma.StringNullableFilter<"ProductVideo"> | string | null
-  productId?: Prisma.IntFilter<"ProductVideo"> | number
+  productId?: Prisma.IntNullableFilter<"ProductVideo"> | number | null
   createdAt?: Prisma.DateTimeFilter<"ProductVideo"> | Date | string
-  product?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
+  product?: Prisma.XOR<Prisma.ProductNullableScalarRelationFilter, Prisma.ProductWhereInput> | null
 }
 
 export type ProductVideoOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   url?: Prisma.SortOrder
   title?: Prisma.SortOrderInput | Prisma.SortOrder
-  productId?: Prisma.SortOrder
+  productId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   product?: Prisma.ProductOrderByWithRelationInput
 }
@@ -239,16 +239,16 @@ export type ProductVideoWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ProductVideoWhereInput | Prisma.ProductVideoWhereInput[]
   url?: Prisma.StringFilter<"ProductVideo"> | string
   title?: Prisma.StringNullableFilter<"ProductVideo"> | string | null
-  productId?: Prisma.IntFilter<"ProductVideo"> | number
+  productId?: Prisma.IntNullableFilter<"ProductVideo"> | number | null
   createdAt?: Prisma.DateTimeFilter<"ProductVideo"> | Date | string
-  product?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
+  product?: Prisma.XOR<Prisma.ProductNullableScalarRelationFilter, Prisma.ProductWhereInput> | null
 }, "id">
 
 export type ProductVideoOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   url?: Prisma.SortOrder
   title?: Prisma.SortOrderInput | Prisma.SortOrder
-  productId?: Prisma.SortOrder
+  productId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.ProductVideoCountOrderByAggregateInput
   _avg?: Prisma.ProductVideoAvgOrderByAggregateInput
@@ -264,7 +264,7 @@ export type ProductVideoScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"ProductVideo"> | number
   url?: Prisma.StringWithAggregatesFilter<"ProductVideo"> | string
   title?: Prisma.StringNullableWithAggregatesFilter<"ProductVideo"> | string | null
-  productId?: Prisma.IntWithAggregatesFilter<"ProductVideo"> | number
+  productId?: Prisma.IntNullableWithAggregatesFilter<"ProductVideo"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ProductVideo"> | Date | string
 }
 
@@ -272,14 +272,14 @@ export type ProductVideoCreateInput = {
   url: string
   title?: string | null
   createdAt?: Date | string
-  product: Prisma.ProductCreateNestedOneWithoutVideosInput
+  product?: Prisma.ProductCreateNestedOneWithoutVideosInput
 }
 
 export type ProductVideoUncheckedCreateInput = {
   id?: number
   url: string
   title?: string | null
-  productId: number
+  productId?: number | null
   createdAt?: Date | string
 }
 
@@ -287,14 +287,14 @@ export type ProductVideoUpdateInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product?: Prisma.ProductUpdateOneRequiredWithoutVideosNestedInput
+  product?: Prisma.ProductUpdateOneWithoutVideosNestedInput
 }
 
 export type ProductVideoUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   url?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  productId?: Prisma.IntFieldUpdateOperationsInput | number
+  productId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -302,7 +302,7 @@ export type ProductVideoCreateManyInput = {
   id?: number
   url: string
   title?: string | null
-  productId: number
+  productId?: number | null
   createdAt?: Date | string
 }
 
@@ -316,7 +316,7 @@ export type ProductVideoUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   url?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  productId?: Prisma.IntFieldUpdateOperationsInput | number
+  productId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -406,6 +406,14 @@ export type ProductVideoUncheckedUpdateManyWithoutProductNestedInput = {
   deleteMany?: Prisma.ProductVideoScalarWhereInput | Prisma.ProductVideoScalarWhereInput[]
 }
 
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type ProductVideoCreateWithoutProductInput = {
   url: string
   title?: string | null
@@ -452,7 +460,7 @@ export type ProductVideoScalarWhereInput = {
   id?: Prisma.IntFilter<"ProductVideo"> | number
   url?: Prisma.StringFilter<"ProductVideo"> | string
   title?: Prisma.StringNullableFilter<"ProductVideo"> | string | null
-  productId?: Prisma.IntFilter<"ProductVideo"> | number
+  productId?: Prisma.IntNullableFilter<"ProductVideo"> | number | null
   createdAt?: Prisma.DateTimeFilter<"ProductVideo"> | Date | string
 }
 
@@ -491,7 +499,7 @@ export type ProductVideoSelect<ExtArgs extends runtime.Types.Extensions.Internal
   title?: boolean
   productId?: boolean
   createdAt?: boolean
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  product?: boolean | Prisma.ProductVideo$productArgs<ExtArgs>
 }, ExtArgs["result"]["productVideo"]>
 
 export type ProductVideoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -500,7 +508,7 @@ export type ProductVideoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   title?: boolean
   productId?: boolean
   createdAt?: boolean
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  product?: boolean | Prisma.ProductVideo$productArgs<ExtArgs>
 }, ExtArgs["result"]["productVideo"]>
 
 export type ProductVideoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -509,7 +517,7 @@ export type ProductVideoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   title?: boolean
   productId?: boolean
   createdAt?: boolean
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  product?: boolean | Prisma.ProductVideo$productArgs<ExtArgs>
 }, ExtArgs["result"]["productVideo"]>
 
 export type ProductVideoSelectScalar = {
@@ -522,25 +530,25 @@ export type ProductVideoSelectScalar = {
 
 export type ProductVideoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "url" | "title" | "productId" | "createdAt", ExtArgs["result"]["productVideo"]>
 export type ProductVideoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  product?: boolean | Prisma.ProductVideo$productArgs<ExtArgs>
 }
 export type ProductVideoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  product?: boolean | Prisma.ProductVideo$productArgs<ExtArgs>
 }
 export type ProductVideoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  product?: boolean | Prisma.ProductVideo$productArgs<ExtArgs>
 }
 
 export type $ProductVideoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ProductVideo"
   objects: {
-    product: Prisma.$ProductPayload<ExtArgs>
+    product: Prisma.$ProductPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     url: string
     title: string | null
-    productId: number
+    productId: number | null
     createdAt: Date
   }, ExtArgs["result"]["productVideo"]>
   composites: {}
@@ -936,7 +944,7 @@ readonly fields: ProductVideoFieldRefs;
  */
 export interface Prisma__ProductVideoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  product<T extends Prisma.ProductDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductClient<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  product<T extends Prisma.ProductVideo$productArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductVideo$productArgs<ExtArgs>>): Prisma.Prisma__ProductClient<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1369,6 +1377,25 @@ export type ProductVideoDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Limit how many ProductVideos to delete.
    */
   limit?: number
+}
+
+/**
+ * ProductVideo.product
+ */
+export type ProductVideo$productArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Product
+   */
+  select?: Prisma.ProductSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Product
+   */
+  omit?: Prisma.ProductOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProductInclude<ExtArgs> | null
+  where?: Prisma.ProductWhereInput
 }
 
 /**

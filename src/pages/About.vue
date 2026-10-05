@@ -1,74 +1,94 @@
 <template>
-  <div class="min-h-screen overflow-x-hidden bg-[#fffaf8] text-[#302525]">
+  <div
+    class="min-h-screen overflow-x-hidden bg-[#fffaf8] pb-20 text-[#302525] lg:pb-0"
+  >
+    <!-- HERO -->
     <section
-      class="relative flex min-h-[calc(100vh-96px)] pt-24 items-center overflow-hidden"
+      class="relative flex min-h-[calc(100vh-92px)] items-center overflow-hidden pt-20 sm:pt-24"
     >
+      <!-- BACKGROUND -->
       <div
-        class="pointer-events-none absolute -left-32 top-24 h-72 w-72 rounded-full bg-[#f3dce2]/50 blur-3xl"
+        class="pointer-events-none absolute -left-32 top-20 h-64 w-64 rounded-full bg-[#f3dce2]/50 blur-3xl sm:h-72 sm:w-72"
       ></div>
 
       <div
-        class="pointer-events-none absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-[#ead0d7]/40 blur-3xl"
+        class="pointer-events-none absolute -right-40 bottom-0 h-80 w-80 rounded-full bg-[#ead0d7]/40 blur-3xl sm:h-96 sm:w-96"
       ></div>
 
       <div
-        class="pointer-events-none absolute -right-8 top-1/2 -translate-y-1/2 select-none font-serif text-[18rem] font-bold leading-none text-[#b83259]/[0.035] sm:text-[24rem] lg:text-[30rem]"
+        class="pointer-events-none absolute -right-8 top-1/2 -translate-y-1/2 select-none font-serif text-[11rem] font-bold leading-none text-[#b83259]/[0.035] sm:text-[20rem] lg:text-[30rem]"
       >
         M
       </div>
 
       <div
-        class="relative mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10"
+        class="relative mx-auto w-full max-w-7xl px-4 py-12 sm:px-8 sm:py-16 lg:px-10 lg:py-20"
       >
-        <div class="flex items-center gap-4">
-          <span class="h-px w-12 bg-[#b83259]"></span>
+        <!-- EYEBROW -->
+        <div class="flex items-center gap-3 sm:gap-4">
+          <span class="h-px w-8 bg-[#b83259] sm:w-12"></span>
 
-          <span class="text-[11px] font-bold tracking-[0.4em] text-[#b83259]">
+          <span
+            class="text-[9px] font-bold tracking-[0.28em] text-[#b83259] sm:text-[11px] sm:tracking-[0.4em]"
+          >
             THE STORY OF MAAD
           </span>
         </div>
 
+        <!-- HEADING -->
         <h1
-          class="mt-8 max-w-5xl font-serif text-[3.8rem] font-medium leading-[0.9] tracking-[-0.05em] sm:text-[5.5rem] lg:text-[7rem]"
+          class="mt-6 max-w-5xl font-serif text-[3rem] font-medium leading-[0.92] tracking-[-0.05em] sm:mt-8 sm:text-[5.5rem] lg:text-[7rem]"
         >
-          We believe
+          Your style should
 
-          <span class="italic text-[#b83259]"> fashion </span>
+          <span class="italic text-[#b83259]"> feel </span>
 
           <br />
 
-          should feel
-          <span class="italic text-[#b83259]"> personal. </span>
+          uniquely
+          <span class="italic text-[#b83259]"> yours. </span>
         </h1>
 
-        <div class="mt-10 grid max-w-5xl gap-8 lg:grid-cols-[1fr_0.7fr]">
+        <!-- INTRO -->
+        <div
+          class="mt-8 grid max-w-5xl gap-8 sm:mt-10 lg:grid-cols-[1fr_0.7fr]"
+        >
           <div>
-            <p class="max-w-2xl text-base leading-8 text-[#75686a] sm:text-lg">
+            <p
+              class="max-w-2xl text-sm leading-7 text-[#75686a] sm:text-base sm:leading-8 lg:text-lg"
+            >
               MAAD Fashions is a contemporary Indian fashion brand built around
               one simple idea — your clothes should reflect your story.
             </p>
 
-            <p class="mt-4 max-w-2xl text-sm leading-7 text-[#948386]">
+            <p
+              class="mt-3 max-w-2xl text-xs leading-6 text-[#948386] sm:mt-4 sm:text-sm sm:leading-7"
+            >
               We bring together traditional craftsmanship, contemporary
               silhouettes and thoughtful personalisation to create pieces that
               feel timeless yet completely yours.
             </p>
           </div>
 
+          <!-- BRAND SIGNATURE -->
           <div class="flex items-center lg:justify-end">
             <div class="text-left lg:text-right">
-              <p class="font-serif text-4xl italic text-[#b83259]">MAAD</p>
+              <p class="font-serif text-3xl italic text-[#b83259] sm:text-4xl">
+                MAAD
+              </p>
 
               <p
-                class="mt-1 text-[9px] font-bold tracking-[0.45em] text-[#8d797d]"
+                class="mt-1 text-[8px] font-bold tracking-[0.35em] text-[#8d797d] sm:text-[9px] sm:tracking-[0.45em]"
               >
                 FASHIONS
               </p>
 
-              <div class="mt-4 flex items-center gap-3 lg:justify-end">
-                <span class="h-px w-8 bg-[#b83259]"></span>
+              <div class="mt-3 flex items-center gap-3 sm:mt-4 lg:justify-end">
+                <span class="h-px w-7 bg-[#b83259] sm:w-8"></span>
 
-                <span class="text-[9px] tracking-[0.25em] text-[#9b8589]">
+                <span
+                  class="text-[8px] tracking-[0.2em] text-[#9b8589] sm:text-[9px] sm:tracking-[0.25em]"
+                >
                   EST. WITH LOVE
                 </span>
               </div>
@@ -76,11 +96,12 @@
           </div>
         </div>
 
-        <div class="mt-14 flex items-center gap-4">
-          <span class="h-px w-10 bg-[#d8b8c0]"></span>
+        <!-- BOTTOM LABEL -->
+        <div class="mt-10 flex items-center gap-3 sm:mt-14 sm:gap-4">
+          <span class="h-px w-8 bg-[#d8b8c0] sm:w-10"></span>
 
           <span
-            class="text-[9px] font-semibold tracking-[0.35em] text-[#a18c90]"
+            class="text-[8px] font-semibold tracking-[0.25em] text-[#a18c90] sm:text-[9px] sm:tracking-[0.35em]"
           >
             ABOUT THE BRAND
           </span>
@@ -88,22 +109,27 @@
       </div>
     </section>
 
-    <section class="bg-white px-6 py-24 sm:px-8 lg:px-10">
+    <!-- WHO WE ARE -->
+    <section class="bg-white px-4 py-14 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
       <div class="mx-auto max-w-6xl">
-        <div class="grid gap-14 lg:grid-cols-[0.8fr_1.2fr]">
+        <div class="grid gap-8 sm:gap-14 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
-            <p class="font-serif text-[7rem] leading-none text-[#b83259]/15">
+            <p
+              class="font-serif text-[5rem] leading-none text-[#b83259]/15 sm:text-[7rem]"
+            >
               01
             </p>
 
-            <p class="mt-4 text-xs font-bold tracking-[0.35em] text-[#b83259]">
+            <p
+              class="mt-3 text-[10px] font-bold tracking-[0.28em] text-[#b83259] sm:mt-4 sm:text-xs sm:tracking-[0.35em]"
+            >
               WHO WE ARE
             </p>
           </div>
 
           <div>
             <h2
-              class="max-w-3xl font-serif text-4xl font-medium leading-tight text-[#302525] sm:text-5xl"
+              class="max-w-3xl font-serif text-3xl font-medium leading-tight text-[#302525] sm:text-5xl"
             >
               A fashion brand inspired by
               <span class="italic text-[#b83259]">
@@ -111,12 +137,16 @@
               </span>
             </h2>
 
-            <p class="mt-7 max-w-2xl text-base leading-8 text-[#75686a]">
+            <p
+              class="mt-5 max-w-2xl text-sm leading-7 text-[#75686a] sm:mt-7 sm:text-base sm:leading-8"
+            >
               MAAD Fashions was created for women who don't want to simply
               follow fashion. They want to make it their own.
             </p>
 
-            <p class="mt-5 max-w-2xl text-base leading-8 text-[#75686a]">
+            <p
+              class="mt-4 max-w-2xl text-sm leading-7 text-[#75686a] sm:mt-5 sm:text-base sm:leading-8"
+            >
               Our collections celebrate the richness of Indian fashion while
               introducing modern shapes, colours and details. The result is
               clothing that feels familiar, elegant and fresh at the same time.
@@ -126,53 +156,61 @@
       </div>
     </section>
 
-    <section class="bg-[#fffaf8] px-6 py-24 sm:px-8 lg:px-10">
+    <!-- OUR BELIEF -->
+    <section class="bg-[#fffaf8] px-4 py-14 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
       <div class="mx-auto max-w-6xl">
-        <div class="grid items-center gap-14 lg:grid-cols-2">
+        <div class="grid items-center gap-10 sm:gap-14 lg:grid-cols-2">
           <div>
-            <p class="text-xs font-bold tracking-[0.35em] text-[#b83259]">
+            <p
+              class="text-[10px] font-bold tracking-[0.28em] text-[#b83259] sm:text-xs sm:tracking-[0.35em]"
+            >
               OUR BELIEF
             </p>
 
             <h2
-              class="mt-5 font-serif text-4xl font-medium leading-tight sm:text-5xl"
+              class="mt-4 font-serif text-3xl font-medium leading-tight sm:mt-5 sm:text-5xl"
             >
               Clothes are more than
               <span class="italic text-[#b83259]"> clothes. </span>
             </h2>
 
-            <p class="mt-7 max-w-xl leading-8 text-[#75686a]">
+            <p
+              class="mt-5 max-w-xl text-sm leading-7 text-[#75686a] sm:mt-7 sm:text-base sm:leading-8"
+            >
               They become part of your memories. The saree you wear to a
               celebration. The dress you choose for an important evening. The
               outfit that makes you feel confident when you need it most.
             </p>
 
-            <p class="mt-5 max-w-xl leading-8 text-[#75686a]">
+            <p
+              class="mt-4 max-w-xl text-sm leading-7 text-[#75686a] sm:mt-5 sm:text-base sm:leading-8"
+            >
               That's why we design MAAD pieces to be more than beautiful. We
               want them to become part of your story.
             </p>
           </div>
 
-          <div class="relative border-l border-[#d9a8b5] pl-8 sm:pl-12">
+          <!-- QUOTE -->
+          <div class="relative border-l border-[#d9a8b5] pl-6 sm:pl-12">
             <span
-              class="absolute -left-3 -top-5 font-serif text-6xl text-[#b83259]"
+              class="absolute -left-2.5 -top-4 font-serif text-5xl text-[#b83259] sm:-left-3 sm:-top-5 sm:text-6xl"
             >
               “
             </span>
 
             <p
-              class="font-serif text-3xl leading-relaxed text-[#302525] sm:text-4xl"
+              class="font-serif text-2xl leading-relaxed text-[#302525] sm:text-4xl"
             >
               The most beautiful thing you can wear is something that feels
               completely
               <span class="italic text-[#b83259]"> yours. </span>
             </p>
 
-            <div class="mt-7 flex items-center gap-3">
-              <span class="h-px w-10 bg-[#b83259]"></span>
+            <div class="mt-5 flex items-center gap-3 sm:mt-7">
+              <span class="h-px w-8 bg-[#b83259] sm:w-10"></span>
 
               <span
-                class="text-[10px] font-semibold tracking-[0.25em] text-[#8d797d]"
+                class="text-[8px] font-semibold tracking-[0.2em] text-[#8d797d] sm:text-[10px] sm:tracking-[0.25em]"
               >
                 THE MAAD PHILOSOPHY
               </span>
@@ -182,69 +220,94 @@
       </div>
     </section>
 
-    <section class="bg-white px-6 py-24 sm:px-8 lg:px-10">
+    <!-- WHAT WE CREATE -->
+    <section class="bg-white px-4 py-14 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
       <div class="mx-auto max-w-6xl">
-        <!-- Heading -->
+        <!-- HEADING -->
         <div class="max-w-2xl">
-          <p class="text-xs font-bold tracking-[0.35em] text-[#b83259]">
+          <p
+            class="text-[10px] font-bold tracking-[0.28em] text-[#b83259] sm:text-xs sm:tracking-[0.35em]"
+          >
             WHAT WE CREATE
           </p>
 
           <h2
-            class="mt-5 font-serif text-4xl font-medium leading-tight sm:text-5xl"
+            class="mt-4 font-serif text-3xl font-medium leading-tight sm:mt-5 sm:text-5xl"
           >
             Designed for every
             <span class="italic text-[#b83259]"> kind of moment. </span>
           </h2>
         </div>
 
-        <div class="mt-14 grid border-y border-[#ead5d8] md:grid-cols-3">
+        <!-- CATEGORIES -->
+        <div
+          class="mt-8 grid border-y border-[#ead5d8] sm:mt-14 md:grid-cols-3"
+        >
+          <!-- DRESSES -->
           <div
-            class="group border-b border-[#ead5d8] px-2 py-10 md:border-b-0 md:border-r md:px-8"
+            class="group border-b border-[#ead5d8] px-1 py-7 sm:px-8 sm:py-10 md:border-b-0 md:border-r"
           >
             <span
-              class="font-serif text-5xl italic text-[#b83259]/30 transition group-hover:text-[#b83259]"
+              class="font-serif text-4xl italic text-[#b83259]/30 transition group-hover:text-[#b83259] sm:text-5xl"
             >
               01
             </span>
 
-            <h3 class="mt-5 font-serif text-2xl text-[#302525]">Dresses</h3>
+            <h3
+              class="mt-3 font-serif text-xl text-[#302525] sm:mt-5 sm:text-2xl"
+            >
+              Dresses
+            </h3>
 
-            <p class="mt-4 text-sm leading-7 text-[#75686a]">
+            <p
+              class="mt-2 text-xs leading-6 text-[#75686a] sm:mt-4 sm:text-sm sm:leading-7"
+            >
               Contemporary silhouettes created for evenings, celebrations and
               everything in between.
             </p>
           </div>
 
+          <!-- SAREES -->
           <div
-            class="group border-b border-[#ead5d8] px-2 py-10 md:border-b-0 md:border-r md:px-8"
+            class="group border-b border-[#ead5d8] px-1 py-7 sm:px-8 sm:py-10 md:border-b-0 md:border-r"
           >
             <span
-              class="font-serif text-5xl italic text-[#b83259]/30 transition group-hover:text-[#b83259]"
+              class="font-serif text-4xl italic text-[#b83259]/30 transition group-hover:text-[#b83259] sm:text-5xl"
             >
               02
             </span>
 
-            <h3 class="mt-5 font-serif text-2xl text-[#302525]">Sarees</h3>
+            <h3
+              class="mt-3 font-serif text-xl text-[#302525] sm:mt-5 sm:text-2xl"
+            >
+              Sarees
+            </h3>
 
-            <p class="mt-4 text-sm leading-7 text-[#75686a]">
+            <p
+              class="mt-2 text-xs leading-6 text-[#75686a] sm:mt-4 sm:text-sm sm:leading-7"
+            >
               Timeless Indian elegance reimagined with modern styling and
               contemporary details.
             </p>
           </div>
 
-          <div class="group px-2 py-10 md:px-8">
+          <!-- CUSTOM -->
+          <div class="group px-1 py-7 sm:px-8 sm:py-10">
             <span
-              class="font-serif text-5xl italic text-[#b83259]/30 transition group-hover:text-[#b83259]"
+              class="font-serif text-4xl italic text-[#b83259]/30 transition group-hover:text-[#b83259] sm:text-5xl"
             >
               03
             </span>
 
-            <h3 class="mt-5 font-serif text-2xl text-[#302525]">
+            <h3
+              class="mt-3 font-serif text-xl text-[#302525] sm:mt-5 sm:text-2xl"
+            >
               Custom Creations
             </h3>
 
-            <p class="mt-4 text-sm leading-7 text-[#75686a]">
+            <p
+              class="mt-2 text-xs leading-6 text-[#75686a] sm:mt-4 sm:text-sm sm:leading-7"
+            >
               Your idea, your measurements, your details — created into
               something uniquely yours.
             </p>
@@ -253,60 +316,90 @@
       </div>
     </section>
 
-    <section class="bg-[#302525] px-6 py-24 text-white">
+    <!-- THE MAAD WAY -->
+    <section class="bg-[#302525] px-4 py-14 text-white sm:px-8 sm:py-20">
       <div class="mx-auto max-w-6xl">
-        <div class="grid gap-14 lg:grid-cols-[0.8fr_1.2fr]">
+        <div class="grid gap-10 sm:gap-14 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
-            <p class="text-xs font-semibold tracking-[0.35em] text-[#f3b8c5]">
+            <p
+              class="text-[10px] font-semibold tracking-[0.28em] text-[#f3b8c5] sm:text-xs sm:tracking-[0.35em]"
+            >
               THE MAAD WAY
             </p>
 
-            <h2 class="mt-5 font-serif text-4xl leading-tight sm:text-5xl">
+            <h2
+              class="mt-4 font-serif text-3xl leading-tight sm:mt-5 sm:text-5xl"
+            >
               What matters
               <span class="italic text-[#f3b8c5]"> to us. </span>
             </h2>
           </div>
 
-          <div class="space-y-8">
-            <div class="flex gap-6 border-b border-white/10 pb-8">
-              <span class="font-serif text-3xl italic text-[#f3b8c5]">
+          <div class="space-y-6 sm:space-y-8">
+            <!-- 01 -->
+            <div
+              class="flex gap-4 border-b border-white/10 pb-6 sm:gap-6 sm:pb-8"
+            >
+              <span
+                class="shrink-0 font-serif text-2xl italic text-[#f3b8c5] sm:text-3xl"
+              >
                 01
               </span>
 
               <div>
-                <h3 class="text-lg font-semibold">Personal expression</h3>
+                <h3 class="text-base font-semibold sm:text-lg">
+                  Personal expression
+                </h3>
 
-                <p class="mt-2 max-w-xl text-sm leading-7 text-white/60">
+                <p
+                  class="mt-1.5 max-w-xl text-xs leading-6 text-white/60 sm:mt-2 sm:text-sm sm:leading-7"
+                >
                   We create space for your personality, because fashion should
                   never make everyone look the same.
                 </p>
               </div>
             </div>
 
-            <div class="flex gap-6 border-b border-white/10 pb-8">
-              <span class="font-serif text-3xl italic text-[#f3b8c5]">
+            <!-- 02 -->
+            <div
+              class="flex gap-4 border-b border-white/10 pb-6 sm:gap-6 sm:pb-8"
+            >
+              <span
+                class="shrink-0 font-serif text-2xl italic text-[#f3b8c5] sm:text-3xl"
+              >
                 02
               </span>
 
               <div>
-                <h3 class="text-lg font-semibold">Timeless design</h3>
+                <h3 class="text-base font-semibold sm:text-lg">
+                  Timeless design
+                </h3>
 
-                <p class="mt-2 max-w-xl text-sm leading-7 text-white/60">
+                <p
+                  class="mt-1.5 max-w-xl text-xs leading-6 text-white/60 sm:mt-2 sm:text-sm sm:leading-7"
+                >
                   We look beyond trends to create styles you will still love
                   long after the occasion is over.
                 </p>
               </div>
             </div>
 
-            <div class="flex gap-6">
-              <span class="font-serif text-3xl italic text-[#f3b8c5]">
+            <!-- 03 -->
+            <div class="flex gap-4 sm:gap-6">
+              <span
+                class="shrink-0 font-serif text-2xl italic text-[#f3b8c5] sm:text-3xl"
+              >
                 03
               </span>
 
               <div>
-                <h3 class="text-lg font-semibold">Meaningful moments</h3>
+                <h3 class="text-base font-semibold sm:text-lg">
+                  Meaningful moments
+                </h3>
 
-                <p class="mt-2 max-w-xl text-sm leading-7 text-white/60">
+                <p
+                  class="mt-1.5 max-w-xl text-xs leading-6 text-white/60 sm:mt-2 sm:text-sm sm:leading-7"
+                >
                   From everyday confidence to unforgettable celebrations, we
                   design with your moments in mind.
                 </p>
@@ -317,51 +410,59 @@
       </div>
     </section>
 
-    <section class="px-6 py-24">
+    <!-- CTA -->
+    <section class="px-4 py-12 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
       <div
-        class="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] bg-[#ad3d5b] px-8 py-16 text-center text-white shadow-xl sm:px-12"
+        class="relative mx-auto max-w-6xl overflow-hidden rounded-[1.5rem] bg-[#ad3d5b] px-5 py-12 text-center text-white shadow-xl sm:rounded-[2rem] sm:px-12 sm:py-16"
       >
+        <!-- BACKGROUND -->
         <div
-          class="absolute -left-20 -top-20 h-48 w-48 rounded-full bg-white/10"
+          class="absolute -left-20 -top-20 h-40 w-40 rounded-full bg-white/10 sm:h-48 sm:w-48"
         ></div>
 
         <div
-          class="absolute -bottom-24 -right-10 h-56 w-56 rounded-full bg-white/10"
+          class="absolute -bottom-24 -right-10 h-48 w-48 rounded-full bg-white/10 sm:h-56 sm:w-56"
         ></div>
 
-        <div class="absolute left-[15%] top-[25%] text-2xl text-white/20">
-          ✦
-        </div>
+        <div class="absolute left-[12%] top-[22%] text-xl text-white/20">✦</div>
 
-        <div class="absolute right-[18%] bottom-[25%] text-2xl text-white/20">
+        <div class="absolute bottom-[22%] right-[12%] text-xl text-white/20">
           ✦
         </div>
 
         <div class="relative">
-          <p class="text-xs font-semibold tracking-[0.35em] text-white/80">
+          <p
+            class="text-[9px] font-semibold tracking-[0.28em] text-white/80 sm:text-xs sm:tracking-[0.35em]"
+          >
             YOUR STYLE. YOUR STORY.
           </p>
 
-          <h2 class="mt-5 font-serif text-4xl font-semibold sm:text-5xl">
+          <h2
+            class="mt-4 font-serif text-3xl font-semibold sm:mt-5 sm:text-5xl"
+          >
             Ready to create your look?
           </h2>
 
-          <p class="mx-auto mt-5 max-w-2xl leading-7 text-white/90">
+          <p
+            class="mx-auto mt-4 max-w-2xl text-sm leading-6 text-white/90 sm:mt-5 sm:text-base sm:leading-7"
+          >
             Explore the MAAD collection or create a customised outfit designed
             especially for you.
           </p>
 
-          <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+          <div
+            class="mt-6 flex flex-col justify-center gap-3 sm:mt-8 sm:flex-row sm:gap-4"
+          >
             <RouterLink
               to="/dresses"
-              class="rounded-full bg-white px-8 py-3 font-semibold text-[#ad3d5b] transition hover:bg-[#fff0f3]"
+              class="rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#ad3d5b] transition hover:bg-[#fff0f3] sm:px-8"
             >
               Explore Collection
             </RouterLink>
 
             <RouterLink
               to="/customised-dresses"
-              class="rounded-full border border-white px-8 py-3 font-semibold text-white transition hover:bg-white/10"
+              class="rounded-full border border-white px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10 sm:px-8"
             >
               Customise Your Look
             </RouterLink>
@@ -370,12 +471,15 @@
       </div>
     </section>
 
-    <RouterLink
-      to="/"
-      class="text-sm font-medium text-[#9b4056] transition hover:text-[#84354a]"
-    >
-      ← Back to Home
-    </RouterLink>
+    <!-- BACK HOME -->
+    <div class="px-4 pb-8 text-center sm:px-8 lg:px-10">
+      <RouterLink
+        to="/"
+        class="text-xs font-medium text-[#9b4056] transition hover:text-[#84354a] sm:text-sm"
+      >
+        ← Back to Home
+      </RouterLink>
+    </div>
   </div>
 </template>
 

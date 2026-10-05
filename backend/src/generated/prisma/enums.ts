@@ -59,3 +59,30 @@ export const CustomOrderStatus = {
 } as const
 
 export type CustomOrderStatus = (typeof CustomOrderStatus)[keyof typeof CustomOrderStatus]
+
+
+export const StyleStoryStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type StyleStoryStatus = (typeof StyleStoryStatus)[keyof typeof StyleStoryStatus]
+
+
+export const StyleStoryMediaType = {
+  IMAGE: 'IMAGE',
+  VIDEO: 'VIDEO'
+} as const
+
+export type StyleStoryMediaType = (typeof StyleStoryMediaType)[keyof typeof StyleStoryMediaType]
+
+
+export const ContactMessageStatus = {
+  NEW: 'NEW',
+  READ: 'READ',
+  REPLIED: 'REPLIED',
+  ARCHIVED: 'ARCHIVED'
+} as const
+
+export type ContactMessageStatus = (typeof ContactMessageStatus)[keyof typeof ContactMessageStatus]

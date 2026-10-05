@@ -84,3 +84,28 @@ export type CustomOrder = Prisma.CustomOrderModel
  * 
  */
 export type CustomOrderImage = Prisma.CustomOrderImageModel
+/**
+ * Model Stall
+ * 
+ */
+export type Stall = Prisma.StallModel
+/**
+ * Model CarouselImage
+ * 
+ */
+export type CarouselImage = Prisma.CarouselImageModel
+/**
+ * Model StyleStory
+ * 
+ */
+export type StyleStory = Prisma.StyleStoryModel
+/**
+ * Model LargeCollectionImage
+ * 
+ */
+export type LargeCollectionImage = Prisma.LargeCollectionImageModel
+/**
+ * Model ContactMessage
+ * 
+ */
+export type ContactMessage = Prisma.ContactMessageModel

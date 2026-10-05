@@ -214,6 +214,7 @@
           </p>
         </section>
 
+        <!-- STATS -->
         <section class="mt-8 grid grid-cols-2 gap-4 lg:grid-cols-4">
           <!-- TOTAL -->
           <div class="rounded-2xl border border-[#ead9d8] bg-white p-5">
@@ -232,6 +233,7 @@
             </p>
           </div>
 
+          <!-- PENDING -->
           <div class="rounded-2xl border border-[#ead9d8] bg-white p-5">
             <div class="flex items-center justify-between">
               <p class="text-sm text-[#806d6d]">Pending</p>
@@ -248,6 +250,7 @@
             </p>
           </div>
 
+          <!-- PROCESSING -->
           <div class="rounded-2xl border border-[#ead9d8] bg-white p-5">
             <div class="flex items-center justify-between">
               <p class="text-sm text-[#806d6d]">Processing</p>
@@ -264,6 +267,7 @@
             </p>
           </div>
 
+          <!-- COMPLETED -->
           <div class="rounded-2xl border border-[#ead9d8] bg-white p-5">
             <div class="flex items-center justify-between">
               <p class="text-sm text-[#806d6d]">Completed</p>
@@ -281,6 +285,7 @@
           </div>
         </section>
 
+        <!-- FILTERS -->
         <section class="mt-8 rounded-2xl border border-[#ead9d8] bg-white p-5">
           <div class="flex flex-col gap-4 lg:flex-row">
             <div class="relative flex-1">
@@ -322,6 +327,7 @@
           </div>
         </section>
 
+        <!-- ORDERS TABLE -->
         <section
           class="mt-6 overflow-hidden rounded-2xl border border-[#ead9d8] bg-white"
         >
@@ -341,220 +347,289 @@
             </p>
           </div>
 
-          <div class="divide-y divide-[#f0e5e3] md:hidden">
-            <div v-for="order in filteredOrders" :key="order.id" class="p-5">
-              <div class="flex items-start justify-between">
-                <div>
-                  <p class="text-sm font-bold text-[#9b4056]">
-                    {{ order.id }}
-                  </p>
+          <!-- LOADING -->
+          <div
+            v-if="loading"
+            class="flex flex-col items-center justify-center px-6 py-16"
+          >
+            <div
+              class="h-10 w-10 animate-spin rounded-full border-4 border-[#f3dce2] border-t-[#9b4056]"
+            ></div>
 
-                  <p class="mt-1 text-sm font-semibold">
-                    {{ order.customer }}
-                  </p>
-
-                  <p class="mt-1 text-xs text-[#9a8588]">
-                    {{ order.date }}
-                  </p>
-                </div>
-
-                <span
-                  class="rounded-full px-3 py-1.5 text-[10px] font-semibold"
-                  :class="orderStatusClass(order.status)"
-                >
-                  {{ order.status }}
-                </span>
-              </div>
-
-              <div
-                class="mt-5 grid grid-cols-2 gap-4 rounded-xl bg-[#fffaf8] p-4"
-              >
-                <div>
-                  <p
-                    class="text-[10px] uppercase tracking-wider text-[#9a8588]"
-                  >
-                    Amount
-                  </p>
-
-                  <p class="mt-1 font-semibold">
-                    ₹{{ order.amount.toLocaleString("en-IN") }}
-                  </p>
-                </div>
-
-                <div>
-                  <p
-                    class="text-[10px] uppercase tracking-wider text-[#9a8588]"
-                  >
-                    Payment
-                  </p>
-
-                  <p
-                    class="mt-1 text-sm font-semibold"
-                    :class="paymentClass(order.payment)"
-                  >
-                    {{ order.payment }}
-                  </p>
-                </div>
-              </div>
-
-              <div class="mt-4 flex gap-2">
-                <button
-                  @click="viewOrder(order)"
-                  class="flex-1 rounded-lg border border-[#ead9d8] py-2.5 text-xs font-semibold text-[#9b4056] hover:bg-[#fff4f5]"
-                >
-                  View Order
-                </button>
-
-                <select
-                  v-model="order.status"
-                  class="flex-1 rounded-lg border border-[#ead9d8] bg-white px-2 py-2 text-xs font-semibold text-[#65575a] outline-none"
-                >
-                  <option>Pending</option>
-                  <option>Processing</option>
-                  <option>Shipped</option>
-                  <option>Delivered</option>
-                  <option>Cancelled</option>
-                </select>
-              </div>
-            </div>
+            <p class="mt-4 text-sm font-semibold text-[#65575a]">
+              Loading orders...
+            </p>
           </div>
 
-          <div class="hidden overflow-x-auto md:block">
-            <table class="w-full min-w-[900px]">
-              <thead>
-                <tr class="border-b border-[#ead9d8] bg-[#fffaf8] text-left">
-                  <th
-                    class="px-6 py-4 text-[10px] font-bold tracking-[0.15em] text-[#9a8588]"
-                  >
-                    ORDER
-                  </th>
+          <!-- ERROR -->
+          <div
+            v-else-if="errorMessage"
+            class="flex flex-col items-center justify-center px-6 py-16 text-center"
+          >
+            <div
+              class="flex h-14 w-14 items-center justify-center rounded-full bg-red-50 text-xl text-red-600"
+            >
+              !
+            </div>
 
-                  <th
-                    class="px-6 py-4 text-[10px] font-bold tracking-[0.15em] text-[#9a8588]"
-                  >
-                    CUSTOMER
-                  </th>
+            <p class="mt-4 font-semibold">Unable to load orders</p>
 
-                  <th
-                    class="px-6 py-4 text-[10px] font-bold tracking-[0.15em] text-[#9a8588]"
-                  >
-                    DATE
-                  </th>
+            <p class="mt-1 max-w-md text-sm text-[#806d6d]">
+              {{ errorMessage }}
+            </p>
 
-                  <th
-                    class="px-6 py-4 text-[10px] font-bold tracking-[0.15em] text-[#9a8588]"
-                  >
-                    AMOUNT
-                  </th>
+            <button
+              @click="fetchOrders"
+              class="mt-5 rounded-xl bg-[#9b4056] px-5 py-2.5 text-xs font-semibold text-white transition hover:bg-[#83364a]"
+            >
+              Try Again
+            </button>
+          </div>
 
-                  <th
-                    class="px-6 py-4 text-[10px] font-bold tracking-[0.15em] text-[#9a8588]"
-                  >
-                    PAYMENT
-                  </th>
-
-                  <th
-                    class="px-6 py-4 text-[10px] font-bold tracking-[0.15em] text-[#9a8588]"
-                  >
-                    STATUS
-                  </th>
-
-                  <th
-                    class="px-6 py-4 text-right text-[10px] font-bold tracking-[0.15em] text-[#9a8588]"
-                  >
-                    ACTION
-                  </th>
-                </tr>
-              </thead>
-
-              <tbody class="divide-y divide-[#f0e5e3]">
-                <tr
-                  v-for="order in filteredOrders"
-                  :key="order.id"
-                  class="transition hover:bg-[#fffaf8]"
-                >
-                  <td class="px-6 py-5">
+          <template v-else>
+            <!-- MOBILE -->
+            <div class="divide-y divide-[#f0e5e3] md:hidden">
+              <div
+                v-for="order in filteredOrders"
+                :key="order.databaseId"
+                class="p-5"
+              >
+                <div class="flex items-start justify-between">
+                  <div>
                     <p class="text-sm font-bold text-[#9b4056]">
                       {{ order.id }}
                     </p>
 
-                    <p class="mt-1 text-xs text-[#9a8588]">
-                      {{ order.items }} item{{ order.items > 1 ? "s" : "" }}
-                    </p>
-                  </td>
-
-                  <td class="px-6 py-5">
-                    <p class="text-sm font-semibold">
+                    <p class="mt-1 text-sm font-semibold">
                       {{ order.customer }}
                     </p>
 
                     <p class="mt-1 text-xs text-[#9a8588]">
-                      {{ order.email }}
+                      {{ order.date }}
                     </p>
-                  </td>
+                  </div>
 
-                  <td class="px-6 py-5 text-sm text-[#65575a]">
-                    {{ order.date }}
-                  </td>
+                  <span
+                    class="rounded-full px-3 py-1.5 text-[10px] font-semibold"
+                    :class="orderStatusClass(order.status)"
+                  >
+                    {{ order.status }}
+                  </span>
+                </div>
 
-                  <td class="px-6 py-5">
-                    <p class="text-sm font-semibold">
+                <div
+                  class="mt-5 grid grid-cols-2 gap-4 rounded-xl bg-[#fffaf8] p-4"
+                >
+                  <div>
+                    <p
+                      class="text-[10px] uppercase tracking-wider text-[#9a8588]"
+                    >
+                      Amount
+                    </p>
+
+                    <p class="mt-1 font-semibold">
                       ₹{{ order.amount.toLocaleString("en-IN") }}
                     </p>
-                  </td>
+                  </div>
 
-                  <td class="px-6 py-5">
-                    <span
-                      class="rounded-full px-3 py-1.5 text-xs font-semibold"
-                      :class="paymentBadgeClass(order.payment)"
+                  <div>
+                    <p
+                      class="text-[10px] uppercase tracking-wider text-[#9a8588]"
+                    >
+                      Payment
+                    </p>
+
+                    <p
+                      class="mt-1 text-sm font-semibold"
+                      :class="paymentClass(order.payment)"
                     >
                       {{ order.payment }}
-                    </span>
-                  </td>
-
-                  <td class="px-6 py-5">
-                    <select
-                      v-model="order.status"
-                      class="rounded-lg border border-[#ead9d8] bg-white px-3 py-2 text-xs font-semibold outline-none focus:border-[#9b4056]"
-                    >
-                      <option>Pending</option>
-                      <option>Processing</option>
-                      <option>Shipped</option>
-                      <option>Delivered</option>
-                      <option>Cancelled</option>
-                    </select>
-                  </td>
-
-                  <td class="px-6 py-5">
-                    <div class="flex justify-end">
-                      <button
-                        @click="viewOrder(order)"
-                        class="rounded-lg border border-[#ead9d8] px-4 py-2 text-xs font-semibold text-[#9b4056] transition hover:bg-[#fff4f5]"
-                      >
-                        View
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr v-if="filteredOrders.length === 0">
-                  <td colspan="7" class="px-6 py-16 text-center">
-                    <div
-                      class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#f8e6ea] text-xl text-[#9b4056]"
-                    >
-                      ▣
-                    </div>
-
-                    <p class="mt-4 font-semibold">No orders found</p>
-
-                    <p class="mt-1 text-sm text-[#806d6d]">
-                      Try changing your search or filters.
                     </p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                  </div>
+                </div>
+
+                <div class="mt-4 flex gap-2">
+                  <button
+                    @click="viewOrder(order)"
+                    class="flex-1 rounded-lg border border-[#ead9d8] py-2.5 text-xs font-semibold text-[#9b4056] hover:bg-[#fff4f5]"
+                  >
+                    View Order
+                  </button>
+
+                  <select
+                    v-model="order.status"
+                    @change="updateOrderStatus(order)"
+                    :disabled="updatingOrderId === order.databaseId"
+                    class="flex-1 rounded-lg border border-[#ead9d8] bg-white px-2 py-2 text-xs font-semibold text-[#65575a] outline-none disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    <option>Pending</option>
+                    <option>Processing</option>
+                    <option>Shipped</option>
+                    <option>Delivered</option>
+                    <option>Cancelled</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- MOBILE EMPTY -->
+              <div
+                v-if="filteredOrders.length === 0"
+                class="px-6 py-16 text-center"
+              >
+                <div
+                  class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#f8e6ea] text-xl text-[#9b4056]"
+                >
+                  ▣
+                </div>
+
+                <p class="mt-4 font-semibold">No orders found</p>
+
+                <p class="mt-1 text-sm text-[#806d6d]">
+                  Try changing your search or filters.
+                </p>
+              </div>
+            </div>
+
+            <!-- DESKTOP -->
+            <div class="hidden overflow-x-auto md:block">
+              <table class="w-full min-w-[900px]">
+                <thead>
+                  <tr class="border-b border-[#ead9d8] bg-[#fffaf8] text-left">
+                    <th
+                      class="px-6 py-4 text-[10px] font-bold tracking-[0.15em] text-[#9a8588]"
+                    >
+                      ORDER
+                    </th>
+
+                    <th
+                      class="px-6 py-4 text-[10px] font-bold tracking-[0.15em] text-[#9a8588]"
+                    >
+                      CUSTOMER
+                    </th>
+
+                    <th
+                      class="px-6 py-4 text-[10px] font-bold tracking-[0.15em] text-[#9a8588]"
+                    >
+                      DATE
+                    </th>
+
+                    <th
+                      class="px-6 py-4 text-[10px] font-bold tracking-[0.15em] text-[#9a8588]"
+                    >
+                      AMOUNT
+                    </th>
+
+                    <th
+                      class="px-6 py-4 text-[10px] font-bold tracking-[0.15em] text-[#9a8588]"
+                    >
+                      PAYMENT
+                    </th>
+
+                    <th
+                      class="px-6 py-4 text-[10px] font-bold tracking-[0.15em] text-[#9a8588]"
+                    >
+                      STATUS
+                    </th>
+
+                    <th
+                      class="px-6 py-4 text-right text-[10px] font-bold tracking-[0.15em] text-[#9a8588]"
+                    >
+                      ACTION
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody class="divide-y divide-[#f0e5e3]">
+                  <tr
+                    v-for="order in filteredOrders"
+                    :key="order.databaseId"
+                    class="transition hover:bg-[#fffaf8]"
+                  >
+                    <td class="px-6 py-5">
+                      <p class="text-sm font-bold text-[#9b4056]">
+                        {{ order.id }}
+                      </p>
+
+                      <p class="mt-1 text-xs text-[#9a8588]">
+                        {{ order.items }} item{{ order.items > 1 ? "s" : "" }}
+                      </p>
+                    </td>
+
+                    <td class="px-6 py-5">
+                      <p class="text-sm font-semibold">
+                        {{ order.customer }}
+                      </p>
+
+                      <p class="mt-1 text-xs text-[#9a8588]">
+                        {{ order.email }}
+                      </p>
+                    </td>
+
+                    <td class="px-6 py-5 text-sm text-[#65575a]">
+                      {{ order.date }}
+                    </td>
+
+                    <td class="px-6 py-5">
+                      <p class="text-sm font-semibold">
+                        ₹{{ order.amount.toLocaleString("en-IN") }}
+                      </p>
+                    </td>
+
+                    <td class="px-6 py-5">
+                      <span
+                        class="rounded-full px-3 py-1.5 text-xs font-semibold"
+                        :class="paymentBadgeClass(order.payment)"
+                      >
+                        {{ order.payment }}
+                      </span>
+                    </td>
+
+                    <td class="px-6 py-5">
+                      <select
+                        v-model="order.status"
+                        @change="updateOrderStatus(order)"
+                        :disabled="updatingOrderId === order.databaseId"
+                        class="rounded-lg border border-[#ead9d8] bg-white px-3 py-2 text-xs font-semibold outline-none focus:border-[#9b4056] disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        <option>Pending</option>
+                        <option>Processing</option>
+                        <option>Shipped</option>
+                        <option>Delivered</option>
+                        <option>Cancelled</option>
+                      </select>
+                    </td>
+
+                    <td class="px-6 py-5">
+                      <div class="flex justify-end">
+                        <button
+                          @click="viewOrder(order)"
+                          class="rounded-lg border border-[#ead9d8] px-4 py-2 text-xs font-semibold text-[#9b4056] transition hover:bg-[#fff4f5]"
+                        >
+                          View
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr v-if="filteredOrders.length === 0">
+                    <td colspan="7" class="px-6 py-16 text-center">
+                      <div
+                        class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#f8e6ea] text-xl text-[#9b4056]"
+                      >
+                        ▣
+                      </div>
+
+                      <p class="mt-4 font-semibold">No orders found</p>
+
+                      <p class="mt-1 text-sm text-[#806d6d]">
+                        Try changing your search or filters.
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </template>
         </section>
 
         <footer
@@ -565,6 +640,7 @@
       </main>
     </div>
 
+    <!-- ORDER DETAILS MODAL -->
     <div
       v-if="selectedOrder"
       class="fixed inset-0 z-[60] flex items-center justify-center bg-[#302525]/40 px-4 py-6"
@@ -595,6 +671,7 @@
         </div>
 
         <div class="space-y-6 p-6">
+          <!-- CUSTOMER -->
           <div class="rounded-2xl bg-[#fffaf8] p-5">
             <p class="text-[10px] font-bold tracking-[0.2em] text-[#9b4056]">
               CUSTOMER
@@ -635,6 +712,7 @@
             </div>
           </div>
 
+          <!-- ORDER ITEMS -->
           <div>
             <p class="text-[10px] font-bold tracking-[0.2em] text-[#9b4056]">
               ORDER ITEMS
@@ -644,40 +722,87 @@
               class="mt-4 divide-y divide-[#ead9d8] rounded-2xl border border-[#ead9d8]"
             >
               <div
-                v-for="item in selectedOrder.products"
-                :key="item.name"
-                class="flex items-center justify-between p-4"
+                v-for="(item, index) in selectedOrder.products"
+                :key="`${item.name}-${index}`"
+                class="flex items-center justify-between gap-4 p-4"
               >
-                <div>
-                  <p class="text-sm font-semibold">
-                    {{ item.name }}
-                  </p>
+                <div class="flex min-w-0 items-center gap-3">
+                  <div
+                    v-if="item.image"
+                    class="h-14 w-14 flex-shrink-0 overflow-hidden rounded-xl border border-[#ead9d8] bg-[#fffaf8]"
+                  >
+                    <img
+                      :src="item.image"
+                      :alt="item.name"
+                      class="h-full w-full object-cover"
+                    />
+                  </div>
 
-                  <p class="mt-1 text-xs text-[#9a8588]">
-                    Quantity: {{ item.quantity }}
-                  </p>
+                  <div>
+                    <p class="text-sm font-semibold">
+                      {{ item.name }}
+                    </p>
+
+                    <p class="mt-1 text-xs text-[#9a8588]">
+                      Quantity: {{ item.quantity }}
+                    </p>
+                  </div>
                 </div>
 
-                <p class="text-sm font-semibold">
+                <p class="flex-shrink-0 text-sm font-semibold">
                   ₹{{ item.price.toLocaleString("en-IN") }}
                 </p>
+              </div>
+
+              <div
+                v-if="selectedOrder.products.length === 0"
+                class="p-5 text-center text-sm text-[#806d6d]"
+              >
+                No items found for this order.
               </div>
             </div>
           </div>
 
+          <!-- DELIVERY ADDRESS -->
           <div class="rounded-2xl border border-[#ead9d8] p-5">
             <p class="text-[10px] font-bold tracking-[0.2em] text-[#9b4056]">
               DELIVERY ADDRESS
             </p>
 
             <p class="mt-3 text-sm leading-6 text-[#65575a]">
-              {{ selectedOrder.address }}
+              {{ selectedOrder.address || "Address not available" }}
             </p>
           </div>
 
+          <!-- PAYMENT -->
+          <div class="rounded-2xl border border-[#ead9d8] p-5">
+            <div class="flex items-center justify-between">
+              <div>
+                <p
+                  class="text-[10px] font-bold tracking-[0.2em] text-[#9b4056]"
+                >
+                  PAYMENT
+                </p>
+
+                <p class="mt-2 text-sm font-semibold">
+                  {{ selectedOrder.payment }}
+                </p>
+              </div>
+
+              <div class="text-right">
+                <p class="text-xs text-[#9a8588]">Method</p>
+
+                <p class="mt-1 text-sm font-semibold">
+                  {{ selectedOrder.paymentMethod }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- TOTAL -->
           <div class="rounded-2xl bg-[#302525] p-5 text-white">
             <div class="flex justify-between text-sm text-white/70">
-              <span> Subtotal </span>
+              <span>Subtotal</span>
 
               <span> ₹{{ selectedOrder.amount.toLocaleString("en-IN") }} </span>
             </div>
@@ -685,7 +810,7 @@
             <div class="my-4 border-t border-white/10"></div>
 
             <div class="flex justify-between">
-              <span class="font-semibold"> Total </span>
+              <span class="font-semibold">Total</span>
 
               <span class="font-serif text-2xl font-semibold text-[#f3b8c5]">
                 ₹{{ selectedOrder.amount.toLocaleString("en-IN") }}
@@ -693,6 +818,7 @@
             </div>
           </div>
 
+          <!-- STATUS -->
           <div>
             <label
               class="mb-2 block text-xs font-bold tracking-[0.15em] text-[#65575a]"
@@ -702,7 +828,9 @@
 
             <select
               v-model="selectedOrder.status"
-              class="w-full rounded-xl border border-[#ead9d8] bg-[#fffaf8] px-4 py-3 text-sm font-semibold outline-none focus:border-[#9b4056]"
+              @change="updateOrderStatus(selectedOrder)"
+              :disabled="updatingOrderId === selectedOrder.databaseId"
+              class="w-full rounded-xl border border-[#ead9d8] bg-[#fffaf8] px-4 py-3 text-sm font-semibold outline-none focus:border-[#9b4056] disabled:cursor-not-allowed disabled:opacity-50"
             >
               <option>Pending</option>
               <option>Processing</option>
@@ -710,6 +838,13 @@
               <option>Delivered</option>
               <option>Cancelled</option>
             </select>
+
+            <p
+              v-if="updatingOrderId === selectedOrder.databaseId"
+              class="mt-2 text-xs text-[#9b4056]"
+            >
+              Updating order status...
+            </p>
           </div>
         </div>
       </div>
@@ -718,10 +853,14 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
-import { RouterLink, useRouter } from "vue-router";
+import { computed, onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
 
 const router = useRouter();
+
+const API_URL = (
+  import.meta.env.VITE_API_URL || "http://localhost:3000"
+).replace(/\/$/, "");
 
 const sidebarOpen = ref(false);
 
@@ -731,141 +870,285 @@ const selectedPayment = ref("All");
 
 const selectedOrder = ref(null);
 
-const orders = ref([
-  {
-    id: "MAAD-10021",
-    customer: "Ananya Reddy",
-    email: "ananya@example.com",
-    phone: "+91 98765 12345",
-    date: "25 Aug 2026",
-    amount: 4498,
-    items: 2,
-    payment: "Paid",
-    status: "Processing",
-    address: "12, Lake View Road, Hyderabad, Telangana - 500001",
-    products: [
-      {
-        name: "Rose Evening Dress",
-        quantity: 1,
-        price: 2499,
-      },
-      {
-        name: "Classic Floral Dress",
-        quantity: 1,
-        price: 1999,
-      },
-    ],
-  },
+const orders = ref([]);
+const loading = ref(false);
+const errorMessage = ref("");
+const updatingOrderId = ref(null);
 
-  {
-    id: "MAAD-10020",
-    customer: "Priya Sharma",
-    email: "priya@example.com",
-    phone: "+91 91234 56789",
-    date: "24 Aug 2026",
-    amount: 3999,
-    items: 1,
-    payment: "Paid",
-    status: "Shipped",
-    address: "24 MG Road, Bengaluru, Karnataka - 560001",
-    products: [
-      {
-        name: "Elegant Silk Saree",
-        quantity: 1,
-        price: 3999,
-      },
-    ],
-  },
+// ============================================================
+// AUTH
+// ============================================================
 
-  {
-    id: "MAAD-10019",
-    customer: "Meera Kapoor",
-    email: "meera@example.com",
-    phone: "+91 99887 66554",
-    date: "23 Aug 2026",
-    amount: 4599,
-    items: 1,
-    payment: "Paid",
-    status: "Pending",
-    address: "45 Park Street, Kolkata, West Bengal - 700016",
-    products: [
-      {
-        name: "Blush Party Gown",
-        quantity: 1,
-        price: 4599,
-      },
-    ],
-  },
+function getToken() {
+  return (
+    localStorage.getItem("adminAccessToken") ||
+    sessionStorage.getItem("adminAccessToken")
+  );
+}
 
-  {
-    id: "MAAD-10018",
-    customer: "Sana Khan",
-    email: "sana@example.com",
-    phone: "+91 90123 45678",
-    date: "22 Aug 2026",
-    amount: 6999,
-    items: 1,
-    payment: "Paid",
-    status: "Delivered",
-    address: "8 Fashion Avenue, Mumbai, Maharashtra - 400001",
-    products: [
-      {
-        name: "Custom Bridal Gown",
-        quantity: 1,
-        price: 6999,
-      },
-    ],
-  },
+function getHeaders() {
+  const token = getToken();
 
-  {
-    id: "MAAD-10017",
-    customer: "Kavya Rao",
-    email: "kavya@example.com",
-    phone: "+91 93456 78901",
-    date: "21 Aug 2026",
-    amount: 2499,
-    items: 1,
-    payment: "Pending",
-    status: "Pending",
-    address: "18 Jubilee Hills, Hyderabad, Telangana - 500033",
-    products: [
-      {
-        name: "Rose Evening Dress",
-        quantity: 1,
-        price: 2499,
-      },
-    ],
-  },
+  return {
+    "Content-Type": "application/json",
+    ...(token
+      ? {
+          Authorization: `Bearer ${token}`,
+        }
+      : {}),
+  };
+}
 
-  {
-    id: "MAAD-10016",
-    customer: "Nisha Verma",
-    email: "nisha@example.com",
-    phone: "+91 98761 23450",
-    date: "20 Aug 2026",
-    amount: 2199,
-    items: 1,
-    payment: "Failed",
-    status: "Cancelled",
-    address: "21 Civil Lines, Delhi - 110054",
-    products: [
-      {
-        name: "Classic Floral Dress",
-        quantity: 1,
-        price: 2199,
-      },
-    ],
-  },
-]);
+// ============================================================
+// STATUS HELPERS
+// ============================================================
+
+function formatStatus(status) {
+  const statusMap = {
+    PENDING: "Pending",
+    CONFIRMED: "Processing",
+    PROCESSING: "Processing",
+    SHIPPED: "Shipped",
+    DELIVERED: "Delivered",
+    CANCELLED: "Cancelled",
+  };
+
+  return (
+    statusMap[
+      String(status || "")
+        .trim()
+        .toUpperCase()
+    ] || "Pending"
+  );
+}
+
+function backendStatus(status) {
+  const statusMap = {
+    Pending: "PENDING",
+    Processing: "PROCESSING",
+    Shipped: "SHIPPED",
+    Delivered: "DELIVERED",
+    Cancelled: "CANCELLED",
+  };
+
+  return statusMap[status] || "PENDING";
+}
+
+// ============================================================
+// PAYMENT HELPERS
+// ============================================================
+
+function formatPaymentStatus(payment) {
+  // Normally payment is an object.
+  // This also safely handles null/undefined.
+
+  const status = String(payment?.status || "").toUpperCase();
+
+  if (status === "PAID") {
+    return "Paid";
+  }
+
+  if (status === "FAILED") {
+    return "Failed";
+  }
+
+  return "Pending";
+}
+
+function formatPaymentMethod(payment) {
+  const method = String(payment?.method || "").toUpperCase();
+
+  const methodMap = {
+    COD: "Cash on Delivery",
+    UPI: "UPI",
+    CARD: "Card",
+    RAZORPAY: "Razorpay",
+  };
+
+  return methodMap[method] || method || "—";
+}
+
+// ============================================================
+// DATE FORMAT
+// ============================================================
+
+function formatDate(date) {
+  if (!date) {
+    return "—";
+  }
+
+  const parsedDate = new Date(date);
+
+  if (Number.isNaN(parsedDate.getTime())) {
+    return "—";
+  }
+
+  return parsedDate.toLocaleDateString("en-IN", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+}
+
+// ============================================================
+// IMAGE URL
+// ============================================================
+
+function getImageUrl(url) {
+  if (!url) {
+    return "";
+  }
+
+  // Already a complete URL
+  if (
+    url.startsWith("http://") ||
+    url.startsWith("https://") ||
+    url.startsWith("data:")
+  ) {
+    return url;
+  }
+
+  // Local frontend public image
+  if (url.startsWith("/")) {
+    return url;
+  }
+
+  // If backend returns a relative path
+  return `${API_URL}/${url.replace(/^\/+/, "")}`;
+}
+
+// ============================================================
+// FORMAT BACKEND ORDER
+// ============================================================
+
+function formatOrder(order) {
+  const orderItems = Array.isArray(order?.items) ? order.items : [];
+
+  const products = orderItems.map((item) => ({
+    name: item?.product?.name || "Product",
+
+    quantity: Number(item?.quantity || 1),
+
+    price: Number(item?.price || 0),
+
+    image: getImageUrl(item?.product?.images?.[0]?.url || ""),
+  }));
+
+  const totalAmount = Number(order?.totalAmount || 0);
+
+  const itemCount = orderItems.reduce(
+    (total, item) => total + Number(item?.quantity || 0),
+    0,
+  );
+
+  return {
+    // Display order number
+    id: order?.orderNumber || `MAAD-${order?.id ?? ""}`,
+
+    // Actual PostgreSQL/Prisma order ID
+    databaseId: Number(order?.id),
+
+    // Customer
+    customer: order?.shippingName || order?.user?.name || "Customer",
+
+    email: order?.shippingEmail || order?.user?.email || "—",
+
+    phone: order?.shippingPhone || order?.user?.phone || "—",
+
+    // Date
+    date: formatDate(order?.createdAt),
+
+    // Total
+    amount: totalAmount,
+
+    // Number of products/quantities
+    items: itemCount,
+
+    // Payment
+    payment: formatPaymentStatus(order?.payment),
+
+    paymentMethod: formatPaymentMethod(order?.payment),
+
+    // Status
+    status: formatStatus(order?.status),
+
+    // Address
+    address: [order?.address, order?.city, order?.state, order?.postalCode]
+      .filter(Boolean)
+      .join(", "),
+
+    // Products
+    products,
+
+    // Keep original backend response
+    raw: order,
+  };
+}
+
+// ============================================================
+// FETCH ORDERS
+// ============================================================
+
+async function fetchOrders() {
+  loading.value = true;
+  errorMessage.value = "";
+
+  try {
+    const response = await fetch(`${API_URL}/orders`, {
+      method: "GET",
+      headers: getHeaders(),
+    });
+
+    if (response.status === 401 || response.status === 403) {
+      throw new Error(
+        "You are not authorized to view orders. Please login again.",
+      );
+    }
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => null);
+
+      const message = Array.isArray(errorData?.message)
+        ? errorData.message.join(", ")
+        : errorData?.message;
+
+      throw new Error(message || "Failed to load orders.");
+    }
+
+    const data = await response.json();
+
+    if (!Array.isArray(data)) {
+      throw new Error("Invalid orders response from server.");
+    }
+
+    orders.value = data.map(formatOrder);
+  } catch (error) {
+    console.error("Orders fetch error:", error);
+
+    errorMessage.value =
+      error?.message ||
+      "Unable to load orders. Please make sure the backend is running.";
+
+    orders.value = [];
+  } finally {
+    loading.value = false;
+  }
+}
+
+// ============================================================
+// FILTERED ORDERS
+// ============================================================
 
 const filteredOrders = computed(() => {
-  return orders.value.filter((order) => {
-    const searchText = search.value.toLowerCase();
+  const searchText = search.value.trim().toLowerCase();
 
+  return orders.value.filter((order) => {
     const matchesSearch =
-      order.id.toLowerCase().includes(searchText) ||
-      order.customer.toLowerCase().includes(searchText) ||
-      order.email.toLowerCase().includes(searchText);
+      !searchText ||
+      String(order.id).toLowerCase().includes(searchText) ||
+      String(order.customer).toLowerCase().includes(searchText) ||
+      String(order.email).toLowerCase().includes(searchText) ||
+      String(order.phone).toLowerCase().includes(searchText);
 
     const matchesStatus =
       selectedStatus.value === "All" || order.status === selectedStatus.value;
@@ -877,6 +1160,10 @@ const filteredOrders = computed(() => {
     return matchesSearch && matchesStatus && matchesPayment;
   });
 });
+
+// ============================================================
+// STATISTICS
+// ============================================================
 
 const pendingOrders = computed(() => {
   return orders.value.filter((order) => order.status === "Pending").length;
@@ -890,45 +1177,173 @@ const completedOrders = computed(() => {
   return orders.value.filter((order) => order.status === "Delivered").length;
 });
 
+// ============================================================
+// VIEW ORDER
+// ============================================================
+
 function viewOrder(order) {
   selectedOrder.value = order;
 }
 
+// ============================================================
+// UPDATE ORDER STATUS
+// ============================================================
+
+async function updateOrderStatus(order) {
+  if (!order) {
+    return;
+  }
+
+  if (!order.databaseId) {
+    console.error("Order database ID is missing.", order);
+
+    return;
+  }
+
+  const newStatus = backendStatus(order.status);
+
+  updatingOrderId.value = order.databaseId;
+
+  try {
+    const response = await fetch(
+      `${API_URL}/orders/${order.databaseId}/status`,
+      {
+        method: "PATCH",
+        headers: getHeaders(),
+        body: JSON.stringify({
+          status: newStatus,
+        }),
+      },
+    );
+
+    if (response.status === 401 || response.status === 403) {
+      throw new Error("You are not authorized to update orders.");
+    }
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => null);
+
+      const message = Array.isArray(errorData?.message)
+        ? errorData.message.join(", ")
+        : errorData?.message;
+
+      throw new Error(message || "Failed to update order status.");
+    }
+
+    const updatedOrder = await response.json();
+
+    const formattedOrder = formatOrder(updatedOrder);
+
+    // Update table/list
+    const index = orders.value.findIndex(
+      (item) => item.databaseId === order.databaseId,
+    );
+
+    if (index !== -1) {
+      orders.value[index] = formattedOrder;
+    }
+
+    // Update modal if this order is currently open
+    if (
+      selectedOrder.value &&
+      selectedOrder.value.databaseId === order.databaseId
+    ) {
+      selectedOrder.value = formattedOrder;
+    }
+  } catch (error) {
+    console.error("Order status update error:", error);
+
+    alert(error?.message || "Unable to update order status.");
+
+    // Reload the order so UI returns to the real backend value
+    await fetchOrders();
+
+    // Re-open the corresponding order if possible
+    if (selectedOrder.value) {
+      const refreshedOrder = orders.value.find(
+        (item) => item.databaseId === selectedOrder.value.databaseId,
+      );
+
+      selectedOrder.value = refreshedOrder || null;
+    }
+  } finally {
+    updatingOrderId.value = null;
+  }
+}
+
+// ============================================================
+// STATUS CLASS
+// ============================================================
+
 function orderStatusClass(status) {
   const classes = {
     Pending: "bg-amber-50 text-amber-700",
+
     Processing: "bg-blue-50 text-blue-700",
+
     Shipped: "bg-purple-50 text-purple-700",
+
     Delivered: "bg-green-50 text-green-700",
+
     Cancelled: "bg-red-50 text-red-700",
   };
 
   return classes[status] || "bg-gray-100 text-gray-600";
 }
 
+// ============================================================
+// PAYMENT BADGE CLASS
+// ============================================================
+
 function paymentBadgeClass(payment) {
   const classes = {
     Paid: "bg-green-50 text-green-700",
+
     Pending: "bg-amber-50 text-amber-700",
+
     Failed: "bg-red-50 text-red-700",
   };
 
   return classes[payment] || "bg-gray-100 text-gray-600";
 }
 
+// ============================================================
+// PAYMENT TEXT CLASS
+// ============================================================
+
 function paymentClass(payment) {
   const classes = {
     Paid: "text-green-600",
+
     Pending: "text-amber-600",
+
     Failed: "text-red-600",
   };
 
   return classes[payment] || "text-[#65575a]";
 }
 
+// ============================================================
+// LOGOUT
+// ============================================================
+
 function logout() {
+  localStorage.removeItem("adminAccessToken");
+
+  sessionStorage.removeItem("adminAccessToken");
+
   localStorage.removeItem("adminLoggedIn");
+
+  sessionStorage.removeItem("adminLoggedIn");
 
   router.push("/admin");
 }
+
+// ============================================================
+// INITIAL LOAD
+// ============================================================
+
+onMounted(() => {
+  fetchOrders();
+});
 </script>

@@ -1,11 +1,13 @@
 <script setup>
 import { computed } from "vue";
 import { useRoute } from "vue-router";
+
 import Navbar from "./components/Navbar.vue";
+import MobileBottomNav from "./components/MobileBottomNav.vue";
 
 const route = useRoute();
 
-// Hide customer navbar on all admin pages
+// Hide customer navigation on all admin pages
 const isAdminPage = computed(() => {
   return route.path.startsWith("/admin");
 });
@@ -13,10 +15,13 @@ const isAdminPage = computed(() => {
 
 <template>
   <div class="min-h-screen">
-    <!-- Customer Navbar -->
+    <!-- ================= CUSTOMER NAVBAR ================= -->
     <Navbar v-if="!isAdminPage" />
 
-    <!-- Page Content -->
+    <!-- ================= PAGE CONTENT ================= -->
     <RouterView />
+
+    <!-- ================= MOBILE BOTTOM NAV ================= -->
+    <MobileBottomNav v-if="!isAdminPage" />
   </div>
 </template>

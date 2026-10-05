@@ -59,7 +59,12 @@ export const ModelName = {
   OrderItem: 'OrderItem',
   Payment: 'Payment',
   CustomOrder: 'CustomOrder',
-  CustomOrderImage: 'CustomOrderImage'
+  CustomOrderImage: 'CustomOrderImage',
+  Stall: 'Stall',
+  CarouselImage: 'CarouselImage',
+  StyleStory: 'StyleStory',
+  LargeCollectionImage: 'LargeCollectionImage',
+  ContactMessage: 'ContactMessage'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -85,6 +90,8 @@ export const UserScalarFieldEnum = {
   phone: 'phone',
   passwordHash: 'passwordHash',
   role: 'role',
+  resetPasswordToken: 'resetPasswordToken',
+  resetPasswordExpires: 'resetPasswordExpires',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -98,6 +105,7 @@ export const ProductScalarFieldEnum = {
   description: 'description',
   price: 'price',
   category: 'category',
+  subCategory: 'subCategory',
   stock: 'stock',
   isActive: 'isActive',
   createdAt: 'createdAt',
@@ -110,6 +118,7 @@ export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeo
 export const ProductImageScalarFieldEnum = {
   id: 'id',
   url: 'url',
+  publicId: 'publicId',
   altText: 'altText',
   productId: 'productId',
   createdAt: 'createdAt'
@@ -202,6 +211,83 @@ export const CustomOrderImageScalarFieldEnum = {
 } as const
 
 export type CustomOrderImageScalarFieldEnum = (typeof CustomOrderImageScalarFieldEnum)[keyof typeof CustomOrderImageScalarFieldEnum]
+
+
+export const StallScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  fullDate: 'fullDate',
+  time: 'time',
+  location: 'location',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StallScalarFieldEnum = (typeof StallScalarFieldEnum)[keyof typeof StallScalarFieldEnum]
+
+
+export const CarouselImageScalarFieldEnum = {
+  id: 'id',
+  url: 'url',
+  publicId: 'publicId',
+  altText: 'altText',
+  sortOrder: 'sortOrder',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CarouselImageScalarFieldEnum = (typeof CarouselImageScalarFieldEnum)[keyof typeof CarouselImageScalarFieldEnum]
+
+
+export const StyleStoryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  productId: 'productId',
+  rating: 'rating',
+  story: 'story',
+  occasion: 'occasion',
+  mediaUrl: 'mediaUrl',
+  mediaType: 'mediaType',
+  status: 'status',
+  featured: 'featured',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StyleStoryScalarFieldEnum = (typeof StyleStoryScalarFieldEnum)[keyof typeof StyleStoryScalarFieldEnum]
+
+
+export const LargeCollectionImageScalarFieldEnum = {
+  id: 'id',
+  url: 'url',
+  publicId: 'publicId',
+  eyebrow: 'eyebrow',
+  title: 'title',
+  subtitle: 'subtitle',
+  altText: 'altText',
+  link: 'link',
+  sortOrder: 'sortOrder',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type LargeCollectionImageScalarFieldEnum = (typeof LargeCollectionImageScalarFieldEnum)[keyof typeof LargeCollectionImageScalarFieldEnum]
+
+
+export const ContactMessageScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  message: 'message',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ContactMessageScalarFieldEnum = (typeof ContactMessageScalarFieldEnum)[keyof typeof ContactMessageScalarFieldEnum]
 
 
 export const SortOrder = {
