@@ -1,3 +1,4 @@
+
 [build]
 command = "npm run build"
 publish = "dist"
@@ -6,10 +7,16 @@ publish = "dist"
 directory = "netlify/functions"
 node_bundler = "esbuild"
 external_node_modules = [
-"express",
-"@nestjs/microservices",
-"@nestjs/microservices/microservices-module",
-"@nestjs/websockets/socket-module"
+  "@nestjs/common",
+  "@nestjs/core",
+  "@nestjs/platform-express",
+  "@nestjs/config",
+  "@nestjs/microservices",
+  "@nestjs/microservices/microservices-module",
+  "@nestjs/websockets/socket-module",
+  "reflect-metadata",
+  "express",
+  "serverless-http"
 ]
 
 [[redirects]]
@@ -17,3 +24,5 @@ from = "/api/*"
 to = "/.netlify/functions/api/:splat"
 status = 200
 force = true
+
+
