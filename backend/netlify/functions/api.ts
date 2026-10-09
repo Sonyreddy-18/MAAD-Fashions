@@ -29,7 +29,9 @@ async function createHandler() {
 
   await nestApp.init();
 
-  return serverless(expressApp);
+  return serverless(expressApp, {
+    basePath: '/api',
+  });
 }
 
 export const handler = async (event: any, context: any) => {
