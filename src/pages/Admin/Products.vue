@@ -1173,7 +1173,7 @@ import { RouterLink, useRouter } from "vue-router";
 
 const router = useRouter();
 
-const API_URL = "http://localhost:3000";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 /* UI */
 const sidebarOpen = ref(false);
