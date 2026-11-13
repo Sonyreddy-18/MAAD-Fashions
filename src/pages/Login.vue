@@ -512,6 +512,8 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 const mode = ref("login");
 
 const showLoginPassword = ref(false);
@@ -552,7 +554,7 @@ const login = async () => {
   loading.value = true;
 
   try {
-    const response = await fetch("http://localhost:3000/auth/login", {
+    const response = await fetch(`${API_URL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -655,7 +657,7 @@ const register = async () => {
   loading.value = true;
 
   try {
-    const response = await fetch("http://localhost:3000/auth/register", {
+    const response = await fetch(`${API_URL}/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -718,7 +720,7 @@ const forgotPassword = async () => {
   loading.value = true;
 
   try {
-    const response = await fetch("http://localhost:3000/auth/forgot-password", {
+    const response = await fetch(`${API_URL}/auth/forgot-password`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

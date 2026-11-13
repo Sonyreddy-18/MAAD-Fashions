@@ -1,7 +1,4 @@
 <template>
-  <!-- =========================================================
-       NAVBAR
-  ========================================================== -->
   <header
     class="fixed left-0 right-0 top-0 z-[100] w-full transition-all duration-300"
     :class="
@@ -1114,10 +1111,6 @@ const sareeCategories = [
   color: #9b4056;
   transform: translateX(3px);
 }
-
-/* ============================================================
-   MOBILE
-============================================================ */
 
 @media (max-width: 640px) {
   .menu-main-link {
